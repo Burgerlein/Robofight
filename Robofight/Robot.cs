@@ -1,4 +1,4 @@
-﻿namespace Robofight;
+namespace Robofight;
 
 public class Robot
 {
@@ -6,10 +6,17 @@ public class Robot
     
     public int HealthPoints { get; set; }
     
-    public int Damge { get; set; }
+    public int Damage { get; set; }
+    
 
     public void Attack(Robot opponent)
     {
-        opponent.HealthPoints -= Damge;
+        if (IsAlive)
+        {
+            opponent.HealthPoints -= Damage;
+        }
     }
+    public bool IsDead => HealthPoints <= 0;
+    public bool IsAlive => !IsDead;
+
 }
