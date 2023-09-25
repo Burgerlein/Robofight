@@ -2,6 +2,9 @@
 
 public class Sword : Weapon
 {
+    public Sword() : base()
+    {
+    }
     public override int CalculateDamage(Robot owner)
     {
         if (CantUseWeapon)

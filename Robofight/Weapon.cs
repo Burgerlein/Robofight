@@ -4,8 +4,10 @@ public abstract class Weapon
 {
     public string Name { get; set; }
     public int Damage { get; set; }
-    private int Durability { get; set; }
+    public int Durability { get; set; }
 
+
+    
     public void Disintegrate()
     {
         Durability--;
