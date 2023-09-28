@@ -6,17 +6,17 @@ public class ConsoleInteractions
 
     public static int GetNumberInput(string textValue)
     {
-        int? value = null;
+        _consoleLogs.PrintWithLineSeparator(textValue);
+
         while (true)
         {
-            _consoleLogs.PrintWithLineSeparator(textValue);
             try
             {
                 return int.Parse(Console.ReadLine() ?? "");
             }
             catch (Exception e)
             {
-                // ignored}
+                _consoleLogs.ClearCurrentConsoleLines(1);
             }
         }
     } 
