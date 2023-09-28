@@ -10,9 +10,5 @@ public class CheckInputs
         return isNumeric;
     }
 
-    public static string ReadLine(string? number)
-    {
-        number = Console.ReadLine();
-        return number;
-    }
+
 }

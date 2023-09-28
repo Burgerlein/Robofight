@@ -24,10 +24,8 @@ public class Game
         while (!IsOnlyOneAlive(robots))
         {
             consoleLogs.RoundMenu();
-            string roundManger = Console.ReadLine() ?? "n";
-
+            string roundManger = ConsoleInteractions.GetTextInput();
             consoleLogs.ClearCurrentConsoleLines(4);
-
             switch (roundManger.ToLower())
             {
                 case "f":

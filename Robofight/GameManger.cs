@@ -16,89 +16,56 @@ public class GameManger
         while (!CheckInputs.CheckIfNumber(botOptionValue))
         {
             consoleLogs.PrintMenuToChooseBotsActiveOrFalse();
-            botOptionValue = CheckInputs.ReadLine(botOptionValue);
+            botOptionValue = Console.ReadLine();
         }
 
         if (Convert.ToInt32(botOptionValue) == 1) return true;
         return false;
     }
 
-    public int ChooseHowManyBotsMenu() // Muss Refaktort werden
+    private int CreateBots(int amopuntOfBots = 1)
     {
-        ConsoleLogs consoleLogs = new ConsoleLogs();
-        consoleLogs.PrintWithLineSeparator("Mit Wie vielen Bots wollen sie spielen ?");
-        string botAmountOptionValue = Console.ReadLine();
-        while (!CheckInputs.CheckIfNumber(botAmountOptionValue))
+        for (int i = 0; i < amopuntOfBots; i++)
         {
-            consoleLogs.PrintWithLineSeparator("Mit Wie vielen Bots wollen sie spielen ?");
-            botAmountOptionValue = CheckInputs.ReadLine(botAmountOptionValue);
-        }
-
-        return Convert.ToInt32(botAmountOptionValue);
-    }
-
-    public int CreatePlayers()
-    {
-        ConsoleLogs consoleLogs = new ConsoleLogs();
-
-        int? playerCount = null;
-        while (playerCount == null)
-        {
-            consoleLogs.PrintWithLineSeparator("Wie viele Spieler sind sie ?");
-            try
-            {
-                playerCount = int.Parse(Console.ReadLine() ?? "");
-            }
-            catch (Exception e)
-            {
-                // ignored}
-            }
-        }
-
-        return (int)playerCount;
-    }
-
-    private int CreateBots(int playerCount, int amopuntOfBots = 1)
-    {
-        while (amopuntOfBots > 0)
-        {
-            var roboWeapon = GetWeapon(Game.CreateRandomNumber(5));
+            var roboWeapon = GetWeapon(Game.CreateRandomNumber(7));
             Robot robot = new Robot
             {
                 Name = $"RobotBot{robots.Count + 1}", HealthPoints = 100, Damage = 5, MaxHealthPoints = 100,
                 Weapon = roboWeapon
             };
-            ;
             robots.Add(robot);
-            playerCount++;
-            amopuntOfBots--;
         }
 
-        return playerCount;
+        return amopuntOfBots;
     }
 
     public List<Robot> AddPlayer() // Muss Refaktort werden
     {
         ConsoleLogs consoleLogs = new ConsoleLogs();
-        
-        var botOptionValue = PlayerCreateOptions();
-        var playerCount = 0;
-        if (Convert.ToInt32(botOptionValue) == 1)
+
+        var botsShouldBeCreated = PlayerCreateOptions();
+        int totalcount;
+        int botCount = 0;
+        if (botsShouldBeCreated)
         {
-            int amopuntOfBots = ChooseHowManyBotsMenu();
-            playerCount = CreateBots(playerCount, amopuntOfBots);
+            int amopuntOfBots = ConsoleInteractions.GetNumberInput("Mit Wie vielen Bots wollen sie spielen ?");
+            botCount = CreateBots(amopuntOfBots);
         }
-        else if (Convert.ToInt32(botOptionValue) == 2)
+        else
         {
             consoleLogs.PrintMenuOptionFromBefore("[1] Ja |", ConsoleColor.Gray, ConsoleColor.Red, " [2] Nein");
         }
 
-        playerCount += CreatePlayers();
-        if (playerCount == 1) playerCount = CreateBots(playerCount);
+        totalcount = ConsoleInteractions.GetNumberInput("Wie viele Spieler sind sie ?");
+        totalcount += botCount;
+        if (totalcount == 1) totalcount += CreateBots();
 
-        while (robots.Count < playerCount)
+        while (robots.Count < totalcount)
         {
-            var roboName = RoboName();
+            string roboName =
+                ConsoleInteractions.GetTextInput(
+                    $"Robot{robots.Count + 1}", "Geben sie den Namen für Robot" + (robots.Count + 1) + " ein: ");
+
             var roboWeapon = RoboWeapon();
             Robot robot = new Robot()
                 { Name = roboName, HealthPoints = 100, Damage = 5, MaxHealthPoints = 100, Weapon = roboWeapon };
@@ -111,14 +78,6 @@ public class GameManger
         return robots;
     }
 
-    public string RoboName()
-    {
-        ConsoleLogs consoleLogs = new ConsoleLogs();
-        consoleLogs.PrintLineSeparator();
-        Console.WriteLine("Geben sie den Namen für Robot" + (robots.Count + 1) + " ein: ");
-        string roboName = Console.ReadLine() ?? $"Robot{robots.Count + 1}";
-        return roboName;
-    }
 
     public Weapon RoboWeapon()
     {
@@ -137,14 +96,9 @@ public class GameManger
             Console.WriteLine(wepon);
         }
 
-        ConsoleLogs consoleLogs = new ConsoleLogs();
-        consoleLogs.PrintLineSeparator();
-
-        Console.WriteLine("Wählen sie eine Waffe aus für Robo" + (robots.Count + 1) + ":");
-        string roboWeapon = Console.ReadLine();
-
-
-        return GetWeapon(Convert.ToInt32(roboWeapon));
+        int roboWeapon =
+            ConsoleInteractions.GetNumberInput("Wählen sie eine Waffe aus für Robo" + (robots.Count + 1) + ":");
+        return GetWeapon(roboWeapon);
     }
 
     private Weapon GetWeapon(int roboWeapon)
