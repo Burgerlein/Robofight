@@ -119,23 +119,17 @@ public class ConsoleLogs
         Console.WriteLine("Runde " + roundNumber + ":");
     }
 
-    public void PrintMenuToChooseBotsActiveOrFalse()
-    {
-        PrintLineSeparator();
-        Console.WriteLine("Möchten sie mit Bots Spielen?");
-        Console.WriteLine("[1] Ja | [2] Nein");
-    }
-
     public void PrintWithLineSeparator(string text)
     {
         PrintLineSeparator();
         Console.WriteLine(text);
     }
 
-    public void PrintMenuOptionFromBefore(string textValueLeft, ConsoleColor colorLeft, ConsoleColor colorRight,
+    public void PrintLeftRightColoredText(string textValueLeft, ConsoleColor colorLeft, string separator ,ConsoleColor colorRight,
         string? textValueRight)
     {
         WriteWithColor(colorLeft, textValueLeft);
+        Console.Write(separator);
         if (textValueRight != null) WriteWithColor(colorRight, textValueRight);
         Console.WriteLine();
     }

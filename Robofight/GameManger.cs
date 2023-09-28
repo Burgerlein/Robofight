@@ -6,22 +6,6 @@ public class GameManger
 {
     private List<Robot> robots = new List<Robot>();
 
-    public bool PlayerCreateOptions() // Muss Refaktort werden
-    {
-        ConsoleLogs consoleLogs = new ConsoleLogs();
-
-        consoleLogs.PrintMenuToChooseBotsActiveOrFalse();
-        string botOptionValue = Console.ReadLine();
-
-        while (!CheckInputs.CheckIfNumber(botOptionValue))
-        {
-            consoleLogs.PrintMenuToChooseBotsActiveOrFalse();
-            botOptionValue = Console.ReadLine();
-        }
-
-        if (Convert.ToInt32(botOptionValue) == 1) return true;
-        return false;
-    }
 
     private int CreateBots(int amopuntOfBots = 1)
     {
@@ -43,17 +27,13 @@ public class GameManger
     {
         ConsoleLogs consoleLogs = new ConsoleLogs();
 
-        var botsShouldBeCreated = PlayerCreateOptions();
+        var botsShouldBeCreated = ConsoleInteractions.GetBoolInput("Möchten sie mit Bots Spielen?");
         int totalcount;
         int botCount = 0;
         if (botsShouldBeCreated)
         {
             int amopuntOfBots = ConsoleInteractions.GetNumberInput("Mit Wie vielen Bots wollen sie spielen ?");
             botCount = CreateBots(amopuntOfBots);
-        }
-        else
-        {
-            consoleLogs.PrintMenuOptionFromBefore("[1] Ja |", ConsoleColor.Gray, ConsoleColor.Red, " [2] Nein");
         }
 
         totalcount = ConsoleInteractions.GetNumberInput("Wie viele Spieler sind sie ?");

@@ -19,7 +19,7 @@ public class ConsoleInteractions
                 _consoleLogs.ClearCurrentConsoleLines(1);
             }
         }
-    } 
+    }
 
     public static string GetTextInput(string? defaultValue = null, string? textValue = null)
     {
@@ -27,7 +27,30 @@ public class ConsoleInteractions
         {
             _consoleLogs.PrintWithLineSeparator(textValue);
         }
+
         string robotName = Console.ReadLine() ?? defaultValue ?? string.Empty;
-        return robotName;  
+        return robotName;
+    }
+
+    public static bool GetBoolInput(string question)
+    {
+        _consoleLogs.PrintWithLineSeparator(question);
+        string yes = "[Y/J] Ja";
+        string separator = " | ";
+        string no = "[N] Nein";
+        Console.WriteLine(yes + separator + no);
+
+        var consoleKeyInfo = Console.ReadKey(true);
+        _consoleLogs.ClearCurrentConsoleLines(1);
+        switch (consoleKeyInfo.KeyChar.ToString().ToLower())
+        {
+            case "y":
+            case "j":
+                _consoleLogs.PrintLeftRightColoredText(yes, ConsoleColor.Green, separator, ConsoleColor.Gray, no);
+                return true;
+            default:
+                _consoleLogs.PrintLeftRightColoredText(yes, ConsoleColor.Gray, separator, ConsoleColor.Red, no);
+                return true;
+        }
     }
 }
