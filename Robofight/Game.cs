@@ -1,4 +1,4 @@
-using Robofight.View;
+﻿using Robofight.View;
 
 
 namespace Robofight;
@@ -16,6 +16,7 @@ public class Game
         var robots = createPlayers.AddPlayer();
 
         bool startRound = ConsoleInteractions.GetBoolInput("Möchten sie das Spiel Starten?");
+        Console.Clear();
         if (startRound)
         {
             consoleLogs.ClearCurrentConsoleLines(2);
