@@ -1,6 +1,9 @@
-﻿namespace Robofight;
+﻿using Robofight.GameTypes;
+using Robofight.Skills.ActiveSkills;
 
-public class Robot : ICanChangeStatus, ICanModifyHealth
+namespace Robofight;
+
+public class Robot : IRobotAbilities
 {
     public string Name { get; set; }
     public int HealthPoints { get; set; }
@@ -11,7 +14,7 @@ public class Robot : ICanChangeStatus, ICanModifyHealth
     public int Damage { get; set; }
     public Weapon Weapon { get; set; }
 
-    public int Attack(ICanTakeDamage opponent)
+    public int Attack(ITakeDamage opponent)
     {
         if (Status == Status.Dead) return 0;
 
@@ -53,5 +56,20 @@ public class Robot : ICanChangeStatus, ICanModifyHealth
         HealthPoints += amount;
         if (HealthPoints > MaxHealthPoints)
             HealthPoints = MaxHealthPoints;
+    }
+
+    void IDealDamage.Damage(int amount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Repair(int amount)
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Disintegrate(int amount)
+    {
+        throw new NotImplementedException();
     }
 }

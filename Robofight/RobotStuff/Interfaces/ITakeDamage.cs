@@ -1,6 +1,6 @@
 ﻿namespace Robofight;
 
-public interface ICanTakeDamage
+public interface ITakeDamage
 {
     public void TakeDamage(int damage);
 }

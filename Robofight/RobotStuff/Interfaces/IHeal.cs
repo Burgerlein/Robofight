@@ -1,6 +1,6 @@
 ﻿namespace Robofight;
 
-public interface ICanHeal
+public interface IHeal
 {
     public void Heal(int amount);
 }

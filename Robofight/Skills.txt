@@ -22,20 +22,17 @@ Passive Skills
         -> IApplyStatusEffect
 
 
-
-
-
-ITakeDamage
-IDealDamage
-IHeal
-    -> IModifyHealth
+ITakeDamage ✔
+IDealDamage✔
+IHeal ✔
+    -> IModifyHealth✔
     
-IRepair
-IDisintegrate
-    -> IModifyWeaponDurability
+IRepair✔
+IDisintegrate ✔
+    -> IModifyWeaponDurability✔
     
 IApplyStatusEffect
    
 -------------------------------
-IRobotAbilities
+IRobotAbilities ✔
     

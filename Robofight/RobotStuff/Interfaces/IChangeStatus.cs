@@ -1,6 +1,6 @@
 ﻿namespace Robofight;
 
-public interface ICanChangeStatus
+public interface IChangeStatus
 {
     public void ChangeStatus(Status status);
 }
