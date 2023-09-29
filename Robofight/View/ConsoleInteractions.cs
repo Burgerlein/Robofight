@@ -4,9 +4,9 @@ public class ConsoleInteractions
 {
     private static readonly ConsoleLogs _consoleLogs = new ConsoleLogs();
 
-    public static int GetNumberInput(string textValue)
+    public static int GetNumberInput(string text)
     {
-        _consoleLogs.PrintWithLineSeparator(textValue);
+        _consoleLogs.PrintWithLineSeparator(text);
 
         while (true)
         {
@@ -28,8 +28,8 @@ public class ConsoleInteractions
             _consoleLogs.PrintWithLineSeparator(textValue);
         }
 
-        string robotName = Console.ReadLine() ?? defaultValue ?? string.Empty;
-        return robotName;
+        string textInput = Console.ReadLine() ?? defaultValue ?? string.Empty;
+        return textInput;
     }
 
     public static bool GetBoolInput(string question)

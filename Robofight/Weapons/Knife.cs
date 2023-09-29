@@ -11,6 +11,7 @@ public class Knife : Weapon
         {
             return (owner.Damage + Damage) * 2;
         }
+
         return owner.Damage + Damage;
     }
 }

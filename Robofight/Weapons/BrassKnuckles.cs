@@ -6,11 +6,12 @@ public class BrassKnuckles : Weapon
     {
         if (CantUseWeapon)
             return owner.Damage;
-        var num =Game.CreateRandomNumber(10);
+        var num = Game.CreateRandomNumber(10);
         if (num == 1)
         {
             return (owner.Damage + Damage) * 3;
         }
+
         return owner.Damage + Damage;
     }
 }

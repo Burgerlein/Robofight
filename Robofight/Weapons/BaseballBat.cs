@@ -2,7 +2,6 @@
 
 public class BaseballBat : Weapon
 {
-
     public override int CalculateDamage(Robot owner)
     {
         if (CantUseWeapon)

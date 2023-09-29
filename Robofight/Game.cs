@@ -8,50 +8,56 @@ public class Game
 {
     public int RoundNumber { get; set; }
 
-    public void CreatePlayer()
-    {
-        GameManger gamerGameManger = new GameManger();
-        var robos = gamerGameManger.AddPlayer();
-
-        GameLoop(robos);
-    }
-
-    public void GameLoop(List<Robot> robots)
+    public void GameLoop()
     {
         ConsoleLogs consoleLogs = new ConsoleLogs();
-        
 
-        while (!IsOnlyOneAlive(robots))
+        CreatePlayers createPlayers = new CreatePlayers();
+        var robots = createPlayers.AddPlayer();
+
+        bool startRound = ConsoleInteractions.GetBoolInput("Möchten sie das Spiel Starten?");
+        if (startRound)
         {
-            consoleLogs.RoundMenu();
-            string roundManger = ConsoleInteractions.GetTextInput();
-            consoleLogs.ClearCurrentConsoleLines(4);
-            switch (roundManger.ToLower())
+            consoleLogs.ClearCurrentConsoleLines(2);
+            NextRound(robots);
+            while (!IsOnlyOneAlive(robots))
             {
-                case "f":
+                consoleLogs.RoundMenu();
+                string roundManger = ConsoleInteractions.GetTextInput();
+                consoleLogs.ClearCurrentConsoleLines(4);
+                switch (roundManger.ToLower())
                 {
-                    for (int i = 1; i <= 5 && !IsOnlyOneAlive(robots); i++)
+                    case "f":
                     {
-                        NextRound(robots);
-                    }
+                        for (int i = 1; i <= 5 && !IsOnlyOneAlive(robots); i++)
+                        {
+                            NextRound(robots);
+                        }
 
-                    break;
-                }
-                case "a":
-                {
-                    while (!IsOnlyOneAlive(robots))
+                        break;
+                    }
+                    case "a":
                     {
-                        NextRound(robots);
-                    }
+                        while (!IsOnlyOneAlive(robots))
+                        {
+                            NextRound(robots);
+                        }
 
-                    break;
+                        break;
+                    }
+                    default:
+                        NextRound(robots);
+                        break;
                 }
-                default:
-                    NextRound(robots);
-                    break;
             }
+
+            consoleLogs.PrintWinner(GetFirstRobotAlive(robots)!);
         }
-        consoleLogs.PrintWinner(GetFirstRobotAlive(robots)!);
+        else
+        {
+            consoleLogs.WriteLineWithColor(ConsoleColor.Red, "Spiel wurde abgebrochen!");
+        }
+
         Console.ReadLine();
     }
 
@@ -62,19 +68,19 @@ public class Game
         consoleLogs.ClearCurrentConsoleLines(5 + robots.Count * 2);
 
 
-        var robosCount = robots.Count;
+        var robotsCount = robots.Count;
 
         consoleLogs.WriteRoundNumber(RoundNumber);
-        var num1 = CreateRandomNumber(robosCount);
+        var num1 = CreateRandomNumber(robotsCount);
         while (robots[num1].IsDead)
         {
-            num1 = CreateRandomNumber(robosCount);
+            num1 = CreateRandomNumber(robotsCount);
         }
 
-        int num2 = CreateRandomNumber(robosCount);
+        var num2 = CreateRandomNumber(robotsCount);
         while (num2 == num1 || robots[num2].IsDead)
         {
-            num2 = CreateRandomNumber(robosCount);
+            num2 = CreateRandomNumber(robotsCount);
         }
 
         robots[num1].IsActive = 2;
@@ -100,11 +106,11 @@ public class Game
 
     public string? GetFirstRobotAlive(List<Robot> robots)
     {
-        foreach (var robo in robots)
+        foreach (var robot in robots)
         {
-            if (robo.IsAlive)
+            if (robot.IsAlive)
             {
-                return robo.Name;
+                return robot.Name;
             }
         }
 
@@ -114,9 +120,9 @@ public class Game
     public bool IsOnlyOneAlive(List<Robot> robots)
     {
         var deadRobots = 0;
-        foreach (var robo in robots)
+        foreach (var robot in robots)
         {
-            if (robo.IsDead)
+            if (robot.IsDead)
             {
                 deadRobots++;
                 if (robots.Count - 1 == deadRobots)

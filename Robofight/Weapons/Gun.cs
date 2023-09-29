@@ -6,11 +6,12 @@ public class Gun : Weapon
     {
         if (CantUseWeapon)
             return owner.Damage;
-        var num =Game.CreateRandomNumber(12);
+        var num = Game.CreateRandomNumber(12);
         if (num == 1)
         {
             return owner.Damage + Damage;
         }
+
         return 0;
     }
 }

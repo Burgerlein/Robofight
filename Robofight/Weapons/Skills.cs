@@ -2,9 +2,8 @@
 
 public class Skills
 {
-    public bool UseAllSkills(Robot attacker,Robot opponent, int totalDamage)
+    public bool UseAllSkills(Robot attacker, Robot opponent, int totalDamage)
     {
-        
         if (SwordDefend(attacker, opponent)) return true;
         if (BowNotHit(attacker, totalDamage)) return true;
         if (BaseballDefend(attacker, opponent)) return true;
@@ -12,17 +11,20 @@ public class Skills
 
         return false;
     }
-    private bool SwordDefend(Robot attacker,Robot opponent)
+
+    private bool SwordDefend(Robot attacker, Robot opponent)
     {
-        if (attacker.Weapon is Sword && opponent.Weapon is Sword)
+        if (attacker.Weapon is Sword && opponent.Weapon is Sword || opponent.Weapon is Knife)
         {
-            var num= Game.CreateRandomNumber(6);
+            var num = Game.CreateRandomNumber(6);
             if (num != 1) return false;
             Defend(attacker, opponent);
             return true;
         }
+
         return false;
     }
+
     private bool BowNotHit(Robot attacker, int totalDamage)
     {
         if (attacker.Weapon is Bow && totalDamage == 0)
@@ -30,9 +32,11 @@ public class Skills
             Console.WriteLine(attacker.Name + " hat nicht getroffen");
             attacker.Weapon.Disintegrate();
             return true;
-        } 
+        }
+
         return false;
     }
+
     private bool GunNotHit(Robot attacker, int totalDamage)
     {
         if (attacker.Weapon is Gun && totalDamage == 0)
@@ -40,24 +44,26 @@ public class Skills
             Console.WriteLine(attacker.Name + " hat nicht getroffen");
             attacker.Weapon.Disintegrate();
             return true;
-        } 
+        }
+
         return false;
     }
-    private bool BaseballDefend(Robot attacker,Robot opponent)
+
+    private bool BaseballDefend(Robot attacker, Robot opponent)
     {
         if (attacker.Weapon is not Knife || opponent.Weapon is not BaseballBat) return false;
-        
-        var num= Game.CreateRandomNumber(6);
+
+        var num = Game.CreateRandomNumber(6);
         if (num != 1) return false;
-        
+
         Defend(attacker, opponent);
         return true;
     }
-    private void Defend(Robot attacker,Robot opponent)
+
+    private void Defend(Robot attacker, Robot opponent)
     {
         Console.WriteLine("schlag abgewehrt");
         attacker.Weapon.Disintegrate();
         opponent.Weapon.Disintegrate();
     }
-    
 }
