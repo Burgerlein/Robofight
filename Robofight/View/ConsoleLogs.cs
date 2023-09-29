@@ -19,6 +19,13 @@ public class ConsoleLogs
         }
     }
 
+    public void ClearSpecificLine(int line)
+    {
+        if (Console.CursorTop == 0)
+            return;
+        Console.SetCursorPosition(0, Console.CursorTop - line);
+        ClearCurrenLine();
+    }
     private static void ClearCurrenLine()
     {
         int currentLineCursor = Console.CursorTop;

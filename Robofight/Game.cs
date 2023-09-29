@@ -51,7 +51,6 @@ public class Game
                     break;
             }
         }
-
         consoleLogs.PrintWinner(GetFirstRobotAlive(robots)!);
         Console.ReadLine();
     }

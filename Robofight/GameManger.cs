@@ -46,22 +46,23 @@ public class GameManger
                 ConsoleInteractions.GetTextInput(
                     $"Robot{robots.Count + 1}", "Geben sie den Namen für Robot" + (robots.Count + 1) + " ein: ");
 
-            var roboWeapon = RoboWeapon();
+            var roboWeapon = RoboWeapon(roboName);
             Robot robot = new Robot()
                 { Name = roboName, HealthPoints = 100, Damage = 5, MaxHealthPoints = 100, Weapon = roboWeapon };
 
-            Console.WriteLine(roboName + " wurde erstellt");
+            consoleLogs.PrintLineSeparator();
+            consoleLogs.PrintLeftRightColoredText(roboName, ConsoleColor.Green, null, ConsoleColor.Gray, " wurde erstellt");
             robots.Add(robot);
         }
-
-
         return robots;
     }
 
 
-    public Weapon RoboWeapon()
+    public Weapon RoboWeapon(string roboName)
     {
-        string[] wepons =
+        ConsoleLogs consoleLogs = new ConsoleLogs();
+
+        string[] weapons =
         {
             "1: Sword          -> Damge: 15 | Durability:  5 | Kann andere Schwerter abwehren 1/6",
             "2: Bow            -> Damge: 45 | Durability:  3 | Treffer Quote liegt bei 1/3",
@@ -70,14 +71,18 @@ public class GameManger
             "5: Baseball Bat   -> Damge:  5 | Durability: 20 | Kann Messer abwehren (1/6)",
             "6: Gun            -> Damge: 50 | Durability:  9 | Treffer Quote liegt bei 1/12"
         };
-
-        foreach (var wepon in wepons)
+        foreach (var weapon in weapons)
         {
-            Console.WriteLine(wepon);
+            Console.WriteLine(weapon);
         }
-
         int roboWeapon =
-            ConsoleInteractions.GetNumberInput("Wählen sie eine Waffe aus für Robo" + (robots.Count + 1) + ":");
+            ConsoleInteractions.GetNumberInput("Wählen sie eine Waffe aus für " + roboName + ":");
+
+        int weaponLine = weapons.Length + 1 + 3 - roboWeapon;
+        consoleLogs.ClearSpecificLine(weaponLine);
+        Console.WriteLine(weapons[roboWeapon]);
+        
+        
         return GetWeapon(roboWeapon);
     }
 
