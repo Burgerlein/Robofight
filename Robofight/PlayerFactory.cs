@@ -2,16 +2,16 @@
 
 namespace Robofight;
 
-public class CreatePlayers
+public class PlayerFactory
 {
-    private List<Robot> robots = new List<Robot>();
+    private static List<Robot> robots = new List<Robot>();
 
 
-    private int CreateBots(int amountOfBots = 1)
+    private static int CreateBots(int amountOfBots = 1)
     {
         for (int i = 0; i < amountOfBots; i++)
         {
-            var robotWeaponNumber = GetWeapon(Game.CreateRandomNumber(7));
+            var robotWeaponNumber = GetWeapon(RandomNumberGenerator.Generate(7));
             Robot robot = new Robot
             {
                 Name = $"RobotBot{robots.Count + 1}", HealthPoints = 100, Damage = 5, MaxHealthPoints = 100,
@@ -23,8 +23,9 @@ public class CreatePlayers
         return amountOfBots;
     }
 
-    public List<Robot> AddPlayer() // Muss Refaktort werden
+    public static List<Robot> CreatePlayers() // Muss Refaktort werden
     {
+        robots.Clear();
         ConsoleLogs consoleLogs = new ConsoleLogs();
 
         var botsShouldBeCreated = ConsoleInteractions.GetBoolInput("Möchten sie mit Bots Spielen?");
@@ -59,7 +60,7 @@ public class CreatePlayers
         return robots;
     }
 
-    public Weapon RoboWeapon(string robotName)
+    private static Weapon RoboWeapon(string robotName)
     {
         ConsoleLogs consoleLogs = new ConsoleLogs();
 
@@ -90,7 +91,7 @@ public class CreatePlayers
         return GetWeapon(numberInput);
     }
 
-    private Weapon GetWeapon(int number)
+    private static Weapon GetWeapon(int number)
     {
         return number switch
         {

@@ -6,7 +6,7 @@ public class Knife : Weapon
     {
         if (CantUseWeapon)
             return owner.Damage;
-        var num = Game.CreateRandomNumber(6);
+        var num = RandomNumberGenerator.Generate(6);
         if (num == 1)
         {
             return (owner.Damage + Damage) * 2;

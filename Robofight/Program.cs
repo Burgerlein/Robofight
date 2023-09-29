@@ -1,6 +1,7 @@
 ﻿using Robofight;
+using Robofight.GameTypes;
 
 // Setup
-Game game = new Game();
-
+IGame game = new DefaultGame();
+game.RoundMode = new OneVsOne();
 game.GameLoop();

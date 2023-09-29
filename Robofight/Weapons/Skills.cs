@@ -16,7 +16,7 @@ public class Skills
     {
         if (attacker.Weapon is Sword && opponent.Weapon is Sword || opponent.Weapon is Knife)
         {
-            var num = Game.CreateRandomNumber(6);
+            var num = RandomNumberGenerator.Generate(6);
             if (num != 1) return false;
             Defend(attacker, opponent);
             return true;
@@ -53,7 +53,7 @@ public class Skills
     {
         if (attacker.Weapon is not Knife || opponent.Weapon is not BaseballBat) return false;
 
-        var num = Game.CreateRandomNumber(6);
+        var num = RandomNumberGenerator.Generate(6);
         if (num != 1) return false;
 
         Defend(attacker, opponent);
