@@ -11,7 +11,7 @@ public class DefaultGame : IGame
     {
         ConsoleLogs consoleLogs = new ConsoleLogs();
 
-        var robots = PlayerFactory.CreatePlayers();
+        var robots = RobotFactory.CreatePlayers();
 
         bool startRound = ConsoleInteractions.GetBoolInput("Möchten sie das Spiel Starten?");
         Console.Clear();
