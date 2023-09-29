@@ -18,13 +18,18 @@ public class ConsoleLogs
             ClearCurrenLine();
         }
     }
-
     public void ClearSpecificLine(int line)
     {
         if (Console.CursorTop == 0)
             return;
         Console.SetCursorPosition(0, Console.CursorTop - line);
         ClearCurrenLine();
+    }
+    public void GoToSpeficLine(int line)
+    {
+        if (Console.CursorTop == 0)
+            return;
+        Console.SetCursorPosition(0, Console.CursorTop + line);
     }
     private static void ClearCurrenLine()
     {
@@ -84,7 +89,12 @@ public class ConsoleLogs
         Console.Write(textValue);
         Console.ResetColor();
     }
-
+    public void WriteLineWithColor(ConsoleColor color, string textValue)
+    {
+        ResetSetColor(color);
+        Console.WriteLine(textValue);
+        Console.ResetColor();
+    }
     public void DurabilityBar(int weaponDurability, int weaponMaxDurability, string weaponName)
     {
         Console.Write($"Waffe: {weaponName,10}{"L ",13}");

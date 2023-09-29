@@ -80,8 +80,9 @@ public class GameManger
 
         int weaponLine = weapons.Length + 1 + 3 - roboWeapon;
         consoleLogs.ClearSpecificLine(weaponLine);
-        Console.WriteLine(weapons[roboWeapon]);
-        
+        consoleLogs.WriteLineWithColor(ConsoleColor.Green, weapons[roboWeapon-1]);
+        consoleLogs.GoToSpeficLine(weapons.Length - (roboWeapon-1) + 2);
+
         
         return GetWeapon(roboWeapon);
     }
