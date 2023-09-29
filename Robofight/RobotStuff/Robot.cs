@@ -11,20 +11,18 @@ public class Robot : ICanChangeStatus, ICanTakeDamage
     public int Damage { get; set; }
     public Weapon Weapon { get; set; }
 
-    public int Attack(Robot opponent)
+    public int Attack(ICanTakeDamage opponent)
     {
-        Skills skills = new Skills();
         if (Status == Status.Dead) return 0;
 
         var totalDamage = Weapon.CalculateDamage(this);
-
-        if (skills.UseAllSkills(this, opponent, totalDamage))
+        Weapon.Disintegrate();
+        if (totalDamage == 0)
         {
+            Console.WriteLine("Hat keinen Schaden gemacht");
             return 0;
         }
-
         opponent.TakeDamage(totalDamage);
-        Weapon.Disintegrate();
         Console.WriteLine("Dabei macht er: " + totalDamage + " Schaden");
         return totalDamage;
     }
