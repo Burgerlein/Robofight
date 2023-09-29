@@ -1,4 +1,4 @@
-﻿using Robofight.View;
+using Robofight.View;
 
 
 namespace Robofight;
@@ -55,7 +55,7 @@ public class Game
         }
         else
         {
-            consoleLogs.WriteLineWithColor(ConsoleColor.Red, "Spiel wurde abgebrochen!");
+            consoleLogs.WriteLineWithColor(ConsoleColor.Red, "Das Spiel wurde abgebrochen!");
         }
 
         Console.ReadLine();
