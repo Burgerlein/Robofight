@@ -1,0 +1,41 @@
+﻿Active Skills
+    - Double Damage
+        -> IDealDamage
+    - Poison
+        -> IApplyStatusEffects
+    - Break Weapon
+        -> IDisintegrate
+    - i can counter and double damage 
+        -> IApplyStatusEffects 
+        -> IDealDamage
+    - Headshot
+        -> IApplyStatusEffect
+        
+        
+        
+Passive Skills
+    - Heal
+        -> IHeal
+    - Repair
+        -> IRepair
+    - Defend
+        -> IApplyStatusEffect
+
+
+
+
+
+ITakeDamage
+IDealDamage
+IHeal
+    -> IModifyHealth
+    
+IRepair
+IDisintegrate
+    -> IModifyWeaponDurability
+    
+IApplyStatusEffect
+   
+-------------------------------
+IRobotAbilities
+    
