@@ -50,7 +50,7 @@ public class ConsoleInteractions
                 return true;
             default:
                 _consoleLogs.PrintLeftRightColoredText(yes, ConsoleColor.Gray, separator, ConsoleColor.Red, no);
-                return false;
+                return true;
         }
     }
 }
