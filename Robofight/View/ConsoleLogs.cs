@@ -63,23 +63,22 @@ public class ConsoleLogs
         Console.WriteLine("[A] um zum ende zu springen");
     }
 
-    public void HealthBar(int health, int maxHealth, string name, int robotActive, int? kills = 0)
+    public void HealthBar(int health, int maxHealth, string name, Status status, int? kills = 0)
     {
-        switch (robotActive)
+        switch (status)
         {
-            case 2:
+            case Status.Attacking:
                 WriteWithColor(ConsoleColor.Green, $"{name,-13} {kills,7}");
                 break;
-            case 3:
+            case Status.Defending:
                 WriteWithColor(ConsoleColor.Yellow, $"{name,-13} {kills,7}");
                 break;
-            default:
-            {
-                if (health <= 0) WriteWithColor(ConsoleColor.Red, $"{name,-13} {kills,7}");
-                else Console.Write($"{name,-13} {kills,7}");
-
+            case Status.Dead:
+                WriteWithColor(ConsoleColor.Red, $"{name,-13} {kills,7}");
                 break;
-            }
+            default:
+                Console.Write($"{name,-13} {kills,7}");
+                break;
         }
 
         Console.Write($"({health,5}) : ");
