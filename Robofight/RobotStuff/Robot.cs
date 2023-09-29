@@ -1,6 +1,6 @@
 ﻿namespace Robofight;
 
-public class Robot : ICanChangeStatus, ICanTakeDamage
+public class Robot : ICanChangeStatus, ICanModifyHealth
 {
     public string Name { get; set; }
     public int HealthPoints { get; set; }
@@ -46,5 +46,12 @@ public class Robot : ICanChangeStatus, ICanTakeDamage
         {
             Status = Status.Dead;
         }
+    }
+
+    public void Heal(int amount)
+    {
+        HealthPoints += amount;
+        if (HealthPoints > MaxHealthPoints)
+            HealthPoints = MaxHealthPoints;
     }
 }
